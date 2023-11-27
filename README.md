@@ -1,7 +1,17 @@
-OpenAI FAQ Generator with Flask
-Descrição
-Este projeto consiste em um gerador de respostas para Perguntas Frequentes (FAQ), utilizando o framework Flask para o back-end e a API do ChatGPT da OpenAI para a geração de texto. O objetivo é criar um serviço simples mas poderoso que pode gerar respostas para perguntas comuns em um determinado campo.
+Harmoneasy - Sommelier Digital para Flores da Cunha
 
+Descrição do Projeto
+O Harmoneasy é um aplicativo desenvolvido durante o Startup Weekend de Flores da Cunha, com o objetivo de proporcionar uma experiência única e personalizada ao usuário, atuando como um Sommelier Digital. O aplicativo utiliza a tecnologia GPT (Generative Pre-trained Transformer) através da API de chatbot para criar interações naturais e envolventes com os usuários.
+
+Funcionalidades
+Chatbot GPT
+O Harmoneasy integra a API do Chat GPT para fornecer respostas inteligentes e personalizadas aos usuários. O Chatbot é treinado para compreender consultas relacionadas a vinhos, harmonizações, recomendações de acordo com preferências pessoais, entre outros.
+
+Flask
+O backend do aplicativo é construído utilizando o framework Flask, proporcionando uma base sólida para a criação de rotas, manipulação de dados e integração eficiente com a API do Chat GPT.
+
+Frontend com HTML e JS
+A interface do usuário é desenvolvida utilizando HTML e JavaScript para garantir uma experiência intuitiva e agradável. A interatividade é enfatizada para proporcionar uma navegação fluida e permitir que os usuários explorem facilmente as funcionalidades do Sommelier Digital.
 Estrutura de Diretórios
 lua
 Copy code
@@ -9,8 +19,7 @@ Copy code
 |-- /templates
 |   |-- index.html
 |-- /static
-|   |-- /css
-|       |-- main.css
+|   |-- Logo.png
 |-- app.py
 |-- requirements.txt
 |-- README.md
@@ -19,7 +28,7 @@ Componentes
 Este diretório contém os arquivos HTML que definem a interface do usuário. No nosso caso, um único arquivo index.html é suficiente para fornecer a interface de usuário necessária.
 
 /static/css
-Este diretório armazena as folhas de estilo CSS que são usadas para estilizar a página HTML.
+Este diretório armazena os elementos presentes no html
 
 app.py
 Este é o arquivo principal do projeto e contém toda a lógica de back-end. Ele é responsável por iniciar o servidor Flask, bem como por manipular as requisições e respostas HTTP.
