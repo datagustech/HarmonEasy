@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atendimento ao cliente com GPT</title>
+    <style>
+        /* Estilos globais */
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #5E1621; /* Cor de fundo global */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Adicionado estilo para o título e o logo */
+        .startup-header {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .startup-title {
+            font-size: 36px;
+            color: #fff; /* Cor do título */
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto */
+        }
+
+        /* Container Central */
+        .container {
+            text-align: center;
+            width: 70%;
+            margin: auto;
+        }
+
+        /* Estilização da caixa de entrada e botão */
+        .input-box,
+        .submit-button {
+            padding: 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 15px; /* Contornos mais arredondados */
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 600px; /* Limite máximo de largura para a caixa de entrada e botão */
+            margin: 0 auto; /* Centraliza a caixa de entrada e botão */
+            background-color: #5E1621; /* Cor de fundo da caixa de entrada e botão */
+            color: #fff; /* Cor do texto na caixa de entrada e botão */
+            box-shadow: 0px 12px 18px rgba(0, 0, 0, 0.3); /* Sombra maior */
+        }
+
+        .input-box::placeholder {
+            color: #fff; /* Cor do texto de placeholder em branco */
+        }
+
+        .submit-button {
+            cursor: pointer;
+            background-color: #D1AC72; /* Cor de fundo do botão Enviar */
+            color: #5E1621; /* Cor do texto no botão Enviar */
+            font-size: 16px; /* Tamanho da fonte do botão */
+        }
+
+        .submit-button:hover {
+            background-color: #8B0000; /* Cor de fundo do botão Enviar ao passar o mouse */
+        }
+
+        /* Sombreamento e estilização da caixa de resposta e do formulário */
+        .box-shadow {
+            box-shadow: 0px 12px 18px rgba(0, 0, 0, 0.3); /* Sombra maior */
+            padding: 20px;
+            border-radius: 15px; /* Contornos mais arredondados */
+            margin: 20px 0;
+            background-color: #5E1621; /* Cor de fundo da caixa de resposta e do formulário */
+            color: #fff; /* Cor do texto na caixa de resposta e do formulário */
+            width: 100%;
+            max-width: 600px; /* Limite máximo de largura para a caixa de resposta e do formulário */
+            margin: auto;
+        }
+
+        .answer-box {
+            padding: 20px;
+            min-height: 100px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+
+            .submit-button {
+                font-size: 14px;
+            }
+
+            .startup-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="startup-header">
+        <img src="../static/Logo.png" alt="Logo da Harmoneasy" style="width: 200px;">
+        <h1 class="startup-title">Sommelier Digital</h1>        
+    </div>
+
+    <!-- Container Central -->
+    <div class="container">
+        <form id="questionForm" class="box-shadow">
+            <input type="text" id="question" placeholder="Faça a sua pergunta aqui..." class="input-box">
+            <button type="submit" id="submit" class="submit-button">Enviar</button>
+        </form>
+
+        <div id="answer" class="answer-box box-shadow"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('submit').addEventListener('click', function(e) {
+                e.preventDefault();
+                let question = document.getElementById('question').value;
+                
+                fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `question=${question}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.answer) {
+                        document.getElementById('answer').innerText = data.answer;
+                    } else {
+                        document.getElementById('answer').innerText = 'An error occurred.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('answer').innerText = 'An error occurred.';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
